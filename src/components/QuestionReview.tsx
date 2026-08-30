@@ -92,7 +92,14 @@ export const QuestionReview: React.FC<QuestionReviewProps> = ({
         }),
       });
 
-      const data = await res.json();
+      const rawText = await res.text();
+      let data: any = {};
+      try {
+        data = JSON.parse(rawText);
+      } catch {
+        data = { error: res.ok ? rawText : `Server returned HTTP ${res.status}` };
+      }
+
       if (data.explanation) {
         setAiExplanations((prev) => ({ ...prev, [q.qId]: data.explanation }));
       } else {

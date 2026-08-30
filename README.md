@@ -85,6 +85,18 @@ A full-stack performance analyzer and evaluation dashboard for **Coal India Limi
 
 ---
 
+## Deploying to Vercel
+
+This repository is pre-configured with Vercel Serverless API functions (`/api/parse-url.ts`, `/api/explain-question.ts`, and `vercel.json`):
+
+1. Import this repository into [Vercel](https://vercel.com).
+2. Framework Preset: **Vite**.
+3. (Optional) Set the `GEMINI_API_KEY` environment variable in Vercel Project Settings for AI concept explanations.
+4. Deploy! Both the React SPA frontend and `/api/*` serverless routes will work immediately.
+5. If the DigiALM CDN link is protected or session-expired, users can also use the **Upload HTML File** or **Paste HTML Source** tabs directly.
+
+---
+
 ## Supported Answer Key Sources
 
 - Coal India Limited (CIL) MT Answer Keys (`cdn.digialm.com`)

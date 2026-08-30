@@ -305,12 +305,37 @@ export const UrlInputSection: React.FC<UrlInputSectionProps> = ({
 
         {/* Error message */}
         {error && (
-          <div className="mt-4 p-4 bg-rose-50 border border-rose-200 rounded-xl flex items-start space-x-3 text-rose-800 text-sm">
-            <AlertCircle className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="font-semibold">Unable to analyze answer key</p>
-              <p className="text-xs text-rose-700 mt-0.5">{error}</p>
+          <div className="mt-4 p-4 bg-rose-50 border border-rose-200 rounded-xl flex flex-col sm:flex-row sm:items-start justify-between gap-3 text-rose-800 text-sm">
+            <div className="flex items-start space-x-3">
+              <AlertCircle className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-semibold text-rose-900">Unable to analyze answer key</p>
+                <p className="text-xs text-rose-700 mt-0.5 leading-relaxed">{error}</p>
+                {activeTab === 'url' && (
+                  <p className="text-xs text-slate-600 mt-2 font-medium">
+                    💡 Tip: If the direct URL link is blocked or protected by TCS iON login session, open the link in your browser, press <kbd className="px-1.5 py-0.5 bg-slate-200 text-slate-800 rounded font-mono text-[10px]">Ctrl+S</kbd> to save the webpage, and upload it below.
+                  </p>
+                )}
+              </div>
             </div>
+            {activeTab === 'url' && (
+              <div className="flex sm:flex-col gap-2 flex-shrink-0 self-end sm:self-center">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('file')}
+                  className="px-3 py-1.5 bg-white hover:bg-rose-100/50 border border-rose-300 text-rose-900 text-xs font-semibold rounded-lg shadow-sm transition"
+                >
+                  Upload File Instead
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('paste')}
+                  className="px-3 py-1.5 bg-rose-700 hover:bg-rose-800 text-white text-xs font-semibold rounded-lg shadow-sm transition"
+                >
+                  Paste Source
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>

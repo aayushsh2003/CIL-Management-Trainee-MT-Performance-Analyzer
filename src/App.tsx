@@ -10,6 +10,7 @@ import { QuestionReview } from './components/QuestionReview';
 import { ScorecardModal } from './components/ScorecardModal';
 import { AssessmentResult, FilterStatus, MarkingScheme } from './types';
 import { parseDigiALMHtml, DEFAULT_MARKING_SCHEMES, reCalculateWithScheme } from './utils/parser';
+import { fetchDigiALMResponseHtml } from './utils/fetcher';
 import { CheckCircle2, Award, AlertCircle, RefreshCw, Upload, ArrowUp } from 'lucide-react';
 
 export default function App() {
@@ -47,20 +48,9 @@ export default function App() {
     setError(null);
 
     try {
-      const response = await fetch('/api/parse-url', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url }),
-      });
-
-      const json = await response.json();
-
-      if (!response.ok || !json.success) {
-        throw new Error(json.error || 'Failed to fetch the DigiALM assessment response key.');
-      }
-
-      setRawHtmlStored(json.html);
-      const parsed = parseDigiALMHtml(json.html, scheme);
+      const result = await fetchDigiALMResponseHtml(url);
+      setRawHtmlStored(result.html);
+      const parsed = parseDigiALMHtml(result.html, scheme);
       setAssessmentData(parsed);
       setMarkingScheme(scheme);
       setIsInputModalOpen(false);
