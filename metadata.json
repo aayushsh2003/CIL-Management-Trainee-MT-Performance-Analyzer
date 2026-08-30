@@ -1,0 +1,6 @@
+{
+  "name": "CIL MT & DigiALM Answer Key Performance Analyzer",
+  "description": "Interactive dashboard and performance analyzer for CIL MT, SSC, and DigiALM assessment answer keys with section-wise scores, accuracy metrics, and question review.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
