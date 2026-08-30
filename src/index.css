@@ -1,1 +1,97 @@
 @import "tailwindcss";
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+}
+
+/* Dedicated Print Styles for Scorecard & Assessment Sheets */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide app navigation, main page dashboard, footers, floating buttons during modal printing */
+  body > div > header,
+  body > div > footer,
+  body > div > main,
+  .print-hide,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Reset modal overlay for paper */
+  .scorecard-modal-backdrop {
+    position: absolute !important;
+    inset: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+    z-index: 99999 !important;
+  }
+
+  .scorecard-modal-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .scorecard-printable-area {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Ensure colors and backgrounds print cleanly */
+  .print-bg-slate-900 {
+    background-color: #0f172a !important;
+    color: #ffffff !important;
+  }
+
+  .print-bg-emerald {
+    background-color: #ecfdf5 !important;
+    border-color: #a7f3d0 !important;
+    color: #065f46 !important;
+  }
+
+  .print-bg-rose {
+    background-color: #fff1f2 !important;
+    border-color: #fecdd3 !important;
+    color: #9f1239 !important;
+  }
+
+  .print-border {
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  /* Table print optimization */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  tr, td, th {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
